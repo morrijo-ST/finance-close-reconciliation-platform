@@ -2,11 +2,15 @@
 
 A rules-driven finance automation platform for multi-source reconciliation, exception management, variance analysis, approval controls, and close-process reporting.
 
+> **Live demo:** https://finance-close-reconciliation-platform.onrender.com
+
 > **Working public demo:** Includes deterministic synthetic invoices and bank transactions, a working reconciliation engine, exception routing, an interactive Streamlit app, tests, and run instructions. See [`DEMO.md`](DEMO.md).
 
 > **Portfolio note:** Public examples use synthetic data and generalized rules; no employer data, customer information, credentials, or proprietary source code are included.
 
 ## Try It
+
+**Hosted:** https://finance-close-reconciliation-platform.onrender.com
 
 ```bash
 python -m venv .venv
@@ -21,8 +25,6 @@ Finance close processes often require analysts to compare multiple source system
 
 ## Demo Scenarios
 
-The synthetic generator deliberately creates:
-
 - exact matches
 - near-amount variances
 - partial payments
@@ -30,7 +32,7 @@ The synthetic generator deliberately creates:
 - unknown payers
 - duplicate transactions
 
-The reconciliation engine then produces an auto-match population and a reviewable exception queue with scores and variance context.
+The reconciliation engine produces an auto-match population and a reviewable exception queue with scores and variance context.
 
 ## Reference Architecture
 
@@ -59,27 +61,6 @@ CRM / ERP / Contract / Bank Data
 
 `Python` `Streamlit` `Pandas` `Plotly` `Azure Functions` `Snowflake` `SQL` `Excel` `APIs` `Finance Controls`
 
-## Repository Structure
-
-```text
-.
-├── app.py
-├── core.py
-├── synthetic.py
-├── requirements.txt
-├── DEMO.md
-├── docs/
-│   ├── case-study.md
-│   ├── architecture.md
-│   ├── business-rules.md
-│   ├── reconciliation-methodology.md
-│   ├── data-dictionary.md
-│   ├── security.md
-│   └── runbook.md
-└── tests/
-    └── test_core.py
-```
-
 ## Demo Status
 
 - [x] Public-safe project definition
@@ -89,7 +70,7 @@ CRM / ERP / Contract / Bank Data
 - [x] Duplicate / partial-payment controls
 - [x] Interactive exception dashboard
 - [x] Automated tests
-- [ ] Hosted live-demo URL
+- [x] Hosted live-demo URL
 - [ ] Recorded walkthrough
 
 ## Control Principle
