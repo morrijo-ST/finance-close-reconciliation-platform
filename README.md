@@ -2,31 +2,40 @@
 
 A rules-driven finance automation platform for multi-source reconciliation, exception management, variance analysis, approval controls, and close-process reporting.
 
-> **Portfolio note:** This repository is a sanitized reference implementation. Public examples use synthetic data and generalized rules; no employer data, customer information, credentials, or proprietary source code are included.
+> **Working public demo:** Includes deterministic synthetic invoices and bank transactions, a working reconciliation engine, exception routing, an interactive Streamlit app, tests, and run instructions. See [`DEMO.md`](DEMO.md).
+
+> **Portfolio note:** Public examples use synthetic data and generalized rules; no employer data, customer information, credentials, or proprietary source code are included.
+
+## Try It
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+streamlit run app.py
+```
 
 ## Business Problem
 
 Finance close processes often require analysts to compare multiple source systems, identify mismatches, classify exceptions, investigate variances, and document resolution. Manual spreadsheet workflows are slow, difficult to audit, and highly dependent on individual process knowledge.
 
-This project demonstrates a reusable reconciliation architecture that separates deterministic matching rules from AI-assisted explanation and keeps approval authority with finance users.
+## Demo Scenarios
 
-## Core Capabilities
+The synthetic generator deliberately creates:
 
-- multi-source ingestion
-- exact and fuzzy matching
-- ACV / TCV style reconciliation patterns
-- duplicate detection
-- variance classification
-- exception queues
-- approval controls
-- audit history
-- close status reporting
-- human-in-the-loop review
+- exact matches
+- near-amount variances
+- partial payments
+- missing references
+- unknown payers
+- duplicate transactions
+
+The reconciliation engine then produces an auto-match population and a reviewable exception queue with scores and variance context.
 
 ## Reference Architecture
 
 ```text
-CRM / ERP / Contract / Prior-Period Data
+CRM / ERP / Contract / Bank Data
                   |
                   v
              Normalization
@@ -40,24 +49,25 @@ CRM / ERP / Contract / Prior-Period Data
     Auto-Matched       Exceptions
                            |
                            v
-                 AI-assisted summary
+                  Human investigation
                            |
                            v
-                    Human approval
-                           |
-                           v
-                      Audit trail
+                    Approval / audit
 ```
 
 ## Technology
 
-`Python` `Azure Functions` `Snowflake` `SQL` `Excel` `APIs` `Finance Controls`
+`Python` `Streamlit` `Pandas` `Plotly` `Azure Functions` `Snowflake` `SQL` `Excel` `APIs` `Finance Controls`
 
 ## Repository Structure
 
 ```text
 .
-├── README.md
+├── app.py
+├── core.py
+├── synthetic.py
+├── requirements.txt
+├── DEMO.md
 ├── docs/
 │   ├── case-study.md
 │   ├── architecture.md
@@ -66,25 +76,22 @@ CRM / ERP / Contract / Prior-Period Data
 │   ├── data-dictionary.md
 │   ├── security.md
 │   └── runbook.md
-├── sample-data/
-├── src/
-├── sql/
-├── diagrams/
-├── screenshots/
 └── tests/
+    └── test_core.py
 ```
 
-## Portfolio Roadmap
+## Demo Status
 
 - [x] Public-safe project definition
-- [ ] Synthetic reconciliation dataset
-- [ ] Deterministic matching engine
-- [ ] Exception classification examples
-- [ ] Approval workflow
-- [ ] Architecture diagram
-- [ ] Management close dashboard
-- [ ] Demo walkthrough
+- [x] Synthetic reconciliation dataset
+- [x] Deterministic matching engine
+- [x] Exception classification
+- [x] Duplicate / partial-payment controls
+- [x] Interactive exception dashboard
+- [x] Automated tests
+- [ ] Hosted live-demo URL
+- [ ] Recorded walkthrough
 
 ## Control Principle
 
-AI may summarize or classify exceptions, but it does not independently post or alter financial records. Deterministic rules, auditability, and human approvals remain authoritative.
+AI may eventually summarize or classify exceptions, but it does not independently post or alter financial records. Deterministic rules, auditability, and human approvals remain authoritative.
